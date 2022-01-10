@@ -8,6 +8,8 @@ from .models import Post
 from .models import Category
 from .models import Comment
 
+from django.contrib.auth.decorators import login_required
+
 from django.db.models import Q
 
 
@@ -78,3 +80,9 @@ def post_detail(request, slug):
 
 def error_404(request, exception):
     return render(request, "404.html")
+
+
+
+@login_required(login_url="/accounts/login")
+def user_profile(request):
+    return render(request, "accounts/profile.html")

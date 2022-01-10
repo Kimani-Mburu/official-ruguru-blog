@@ -1,3 +1,4 @@
+from django.db.models.deletion import CASCADE
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.urls import reverse
@@ -8,6 +9,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django_resized import ResizedImageField
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save
+
+from django.contrib.auth.models import User
 
 
 STATUS_CHOICES = (('published', 'Published'), ('draft', 'Draft'),)
@@ -115,9 +118,15 @@ pre_save.connect(slug_generator, sender=Post)
 pre_save.connect(slug_generator, sender=Category)
 pre_save.connect(slug_generator, sender=Tag)
 
-
-# class Comment(models.Model):
-#     # post
-#     # commentor_name
-#     # date_added DateTimeField(auto_now_add=True)
-#     pass
+class profile(models.Model):
+    username = models.CharField(max_length=10, blank=True, null=True)
+    profile_image = models.ImageField()
+    first_name = models.CharField(max_length=20, blank=True, null=True)
+    last_name = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField()
+    
+    
+    def __str__(self):
+        return self.username
+    
+    

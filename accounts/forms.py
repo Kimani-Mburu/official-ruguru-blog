@@ -10,4 +10,4 @@ class SignUpForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Email/userename', required=True)
+    username = forms.CharField(label='Email/username', required=True)
